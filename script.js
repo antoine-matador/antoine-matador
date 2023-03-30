@@ -85,6 +85,61 @@ diagram.addDiagramListener("ObjectSingleClicked",
     }
   });
 
+function levenshteinDistance(s1, s2) {
+  if (s1.length < s2.length) {
+    var temp = s1;
+    s1 = s2;
+    s2 = temp;
+  }
+  var m = s1.length;
+  var n = s2.length;
+  var d = new Array(n + 1);
+  for (var j = 0; j <= n; j++) {
+    d[j] = j;
+  }
+  for (var i = 1; i <= m; i++) {
+    var prev = i - 1;
+    var diag = prev;
+    d[0] = i;
+    for (var j = 1; j <= n; j++) {
+      var cost = (s1.charAt(i - 1) == s2.charAt(j - 1)) ? 0 : 1;
+      var min = Math.min(d[j] + 1, d[j - 1] + 1, diag + cost);
+      diag = d[j];
+      d[j] = min;
+    }
+  }
+  return d[n];
+}
+
+function findNodeClosestToName(name) {
+  var closestNode = null;
+  var closestDistance = Infinity;
+  var predicate = function(node) { return true; };
+  var nodes = diagram.findNodesByExample({}, predicate);
+  nodes.each(function(node) {
+    var distance = levenshteinDistance(node.data.name, name);
+    if (distance < closestDistance) {
+      closestNode = node;
+      closestDistance = distance;
+    }
+  });
+  return closestNode;
+}
+
+function search() {
+  var input = document.getElementById("input").value;
+  if (input) {
+    var node = findNodeClosestToName(input);
+    console.log(input);
+    if (node) {
+      diagram.centerRect(node.actualBounds);
+      node.isSelected = true;
+    } else {
+      console.log("Node not found");
+    }
+  }
+}
+
 var resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
   is_globalModel = true;
