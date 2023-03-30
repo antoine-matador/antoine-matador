@@ -117,7 +117,15 @@ function findNodeClosestToName(name) {
   var predicate = function(node) { return true; };
   var nodes = diagram.findNodesByExample({}, predicate);
   nodes.each(function(node) {
-    var distance = levenshteinDistance(node.data.name, name);
+    if (node.data.name.includes(".")) {
+      node_name = node.data.name.split(".")[1];
+    } else if (node.data.name.includes(" ")) {
+      node_name = node.data.name.split(" ")[0];
+    } else {
+      node_name = node.data.name;
+    };
+    var distance = levenshteinDistance(node_name, name);
+    console.log(node.data.name);
     if (distance < closestDistance) {
       closestNode = node;
       closestDistance = distance;
@@ -127,6 +135,7 @@ function findNodeClosestToName(name) {
 }
 
 function search() {
+  diagram.nodes.each(function(n) { n.isSelected = false; });
   var input = document.getElementById("input").value;
   if (input) {
     var node = findNodeClosestToName(input);
