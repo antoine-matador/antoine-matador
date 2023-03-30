@@ -48,7 +48,7 @@ function showChildNodeRecursive(node) {
   while (children.next()) {
     var child = children.value;
     child.visible = true;
-    showParentNodeRecursive(child);
+    showChildNodeRecursive(child);
   }
 }
 
@@ -81,18 +81,9 @@ diagram.addDiagramListener("ObjectSingleClicked",
     else if (is_child) {
       diagram.nodes.each(function(n) { n.visible = false; });
       currentNode.visible = true;
-      // showChildNodeRecursive(currentNode);
+      showChildNodeRecursive(currentNode);
     }
   });
-
-    // diag.nodes.each(n => {
-    //   var childrenNodes = part.findNodesOutOf();
-    //   while (childrenNodes.next()) {
-    //     if (n != childrenNodes.value) {
-    //       diagram.model.removeNodeData(n);
-    //     }
-    //   };
-    // });
 
 var resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
@@ -144,9 +135,7 @@ childButton.addEventListener('click', () => {
 function loadGlobalModel() {
 
       diagram.model = new go.GraphLinksModel([
-      	// { key: "", name: "", color: "" },
-      	// { key: "", name: "", color: "" },
-        
+
         // Tables
         { key: "t_AdesaEventsCA",                       name: "Adesa_Ext.AdesaEventsCA",                              color: "lightskyblue" },
         { key: "t_AdesaEventsUS",                       name: "Adesa_Ext.AdesaEventsUS",                              color: "lightskyblue" },
