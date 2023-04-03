@@ -303,6 +303,7 @@ function loadGlobalModel() {
         { key: "p_loadCrListingsArchive_v2",            name: "loadCrListingsArchive_v2 [5:30+45AM, 8+30AM, 9:15+40PM]",  color: "lightpink" },
         { key: "p_Proc_Adesa_temp",                     name: "Proc_Adesa_temp",                                          color: "lightpink" },
         { key: "p_proc_BWAD_Rules_Average",             name: "proc_BWAD_Rules_Average",                                  color: "lightpink" },
+        { key: "p_Proc_CR_Keywords_tbl",                name: "Proc_CR_Keywords_tbl",                                     color: "lightpink" },
         { key: "p_Proc_Insert_DNB_VAT_lowgrade",        name: "Proc_Insert_DNB_VAT_lowgrade",                             color: "lightpink" },
         { key: "p_Proc_Get_Recon_Test",                 name: "Proc_Get_Recon_Test",                                      color: "lightpink" },
         { key: "p_proc_loadVhr",                        name: "proc_loadVhr [6:30AM, 9:15PM]",                            color: "lightpink" },
