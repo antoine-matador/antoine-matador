@@ -39,7 +39,9 @@ function showParentNodeRecursive(node) {
   while (parents.next()) {
     var parent = parents.value;
     parent.visible = true;
-    showParentNodeRecursive(parent);
+    if ( node.data.key !== 'v_sales_last90_info' || parent.data.key !== 't_core' ) {
+      showParentNodeRecursive(parent);
+    }
   }
 }
 
@@ -204,15 +206,17 @@ function loadGlobalModel() {
         { key: "t_AdesaEventsCA",                       name: "Adesa_Ext.AdesaEventsCA",                              color: "lightskyblue" },
         { key: "t_AdesaEventsUS",                       name: "Adesa_Ext.AdesaEventsUS",                              color: "lightskyblue" },
         { key: "t_Adesa_CR_Listing",                    name: "Adesa_Ext.Adesa_CR_Listing",                           color: "lightskyblue" },
+        { key: "t_Adesa_DNB_Archive",                   name: "Adesa_Ext.Adesa_DNB_Archive",                          color: "lightskyblue" },
         { key: "t_CR_Listings",                         name: "Auction_Listings.CR_Listings",                         color: "lightskyblue" },
         { key: "t_CR_Listings_Archive",                 name: "Auction_Listings.CR_Listings_Archive",                 color: "lightskyblue" },
         { key: "t_Listings",                            name: "Auction_Listings.Listings",                            color: "lightskyblue" },
       	{ key: "t_Listings_Archives",                   name: "Auction_Listings.Listings_Archives",                   color: "lightskyblue" },
-      	{ key: "t_manheim_auction",                     name: "auctionbids_ext_mongodb.manheim_auction",           color: "lightskyblue" },
+      	{ key: "t_manheim_auction",                     name: "auctionbids_ext_mongodb.manheim_auction",              color: "lightskyblue" },
       	{ key: "t_BuyersLog_Archived",                  name: "BuyersLogs_US_Int_GSheets.Archived",                   color: "lightskyblue" },
       	{ key: "t_BuyersLog_Current",                   name: "BuyersLogs_US_Int_GSheets.Current",                    color: "lightskyblue" },
       	{ key: "t_BuyersLog_Current_Linked",            name: "BuyersLogs_US_Int_GSheets.Current_Linked",             color: "lightskyblue" },
       	{ key: "t_banned_sellers",                      name: "bwad.banned_sellers",                                  color: "lightskyblue" },
+        { key: "t_view_DNB_Adesa_S1_tbl",               name: "bwad.view_DNB_Adesa_S1_tbl",                           color: "lightskyblue" },
       	{ key: "t_View_DNB_Archives_tbl",               name: "bwad.View_DNB_Archives_tbl",                           color: "lightskyblue" },
       	{ key: "t_vhr",                                 name: "bwad_autocheck.vhr",                                   color: "lightskyblue" },
       	{ key: "t_vhr_temp",                            name: "bwad_autocheck.vhr_temp",                              color: "lightskyblue" },
@@ -240,6 +244,9 @@ function loadGlobalModel() {
         { key: "t_VehicleSales",                        name: "Qlik_Int.VehicleSales",                                color: "lightskyblue" },
         { key: "t_AllAuctionDetail",                    name: "RunLists_Ext.AllAuctionDetail",                        color: "lightskyblue" },
         { key: "t_AuctionDetail",                       name: "RunLists_Ext.AuctionDetail",                           color: "lightskyblue" },
+        { key: "t_BuyerNotes_Manheim_CSS",              name: "RunLists_Ext.BuyerNotes_Manheim_CSS",                  color: "lightskyblue" },
+        { key: "t_BuyerNotesAdesaV3",                   name: "RunLists_Ext.BuyerNotesAdesaV3",                       color: "lightskyblue" },
+        { key: "t_BuyerNotesEdge",                      name: "RunLists_Ext.BuyerNotesEdge",                          color: "lightskyblue" },
         { key: "t_BuyerNotesV3",                        name: "RunLists_Ext.BuyerNotesV3",                            color: "lightskyblue" },
         { key: "t_Car_Arbitration_All",                 name: "RunLists_Ext.Car_Arbitration_All",                     color: "lightskyblue" },
         { key: "t_Car_Arbitration_Latest",              name: "RunLists_Ext.Car_Arbitration_Latest",                  color: "lightskyblue" },
@@ -261,6 +268,7 @@ function loadGlobalModel() {
       	{ key: "v_View_CR_Listings_Archive",            name: "Auction_Listings.View_CR_Listings_Archive",            color: "lightcyan" },
       	{ key: "v_View_BuyersLog_Main",                 name: "BuyersLogs_US_Int_GSheets.View_BuyersLog_Main",        color: "lightcyan" },
         { key: "v_View_DNB",                            name: "bwad.View_DNB",                                        color: "lightcyan" },
+        { key: "v_view_DNB_Adesa_S1",                   name: "bwad.view_DNB_Adesa_S1",                               color: "lightcyan" },
       	{ key: "v_View_DNB_Archives_V1",                name: "bwad.View_DNB_Archives_V1",                            color: "lightcyan" },
       	{ key: "v_View_DNB_Current",                    name: "bwad.View_DNB_Current",                                color: "lightcyan" },
       	{ key: "v_View_Adesa_Cost_Breakup_Canada",      name: "BWAD_Int.View_Adesa_Cost_Breakup_Canada",              color: "lightcyan" },
@@ -268,8 +276,14 @@ function loadGlobalModel() {
       	{ key: "v_View_Adesa_Tire",                     name: "BWAD_Int.View_Adesa_Tire",                             color: "lightcyan" },
       	{ key: "v_View_Repair_Breakup_Cost",            name: "BWAD_Int.View_Repair_Breakup_Cost",                    color: "lightcyan" },
         { key: "v_view_BuyerNotesV3",                   name: "RunLists_Ext.view_BuyerNotesV3",                       color: "lightcyan" },
+        { key: "v_view_BuyerNotesV3_Adesa",             name: "RunLists_Ext.view_BuyerNotesV3_Adesa",                 color: "lightcyan" },
+        { key: "v_view_BuyerNotesEdge",                 name: "RunLists_Ext.view_BuyerNotesEdge",                     color: "lightcyan" },
+        { key: "v_view_BuyerNotesEdge_Dealerwise",      name: "RunLists_Ext.view_BuyerNotesEdge_Dealerwise",          color: "lightcyan" },
+        { key: "v_view_BuyerNotesEdge_Statewise",       name: "RunLists_Ext.view_BuyerNotesEdge_Statewise",           color: "lightcyan" },
         { key: "v_view_BuyerNotesV3_DealerWise",        name: "RunLists_Ext.view_BuyerNotesV3_DealerWise",            color: "lightcyan" },
+        { key: "v_view_BuyerNotesV3_DealerWise_Adesa",  name: "RunLists_Ext.view_BuyerNotesV3_DealerWise_Adesa",      color: "lightcyan" },
         { key: "v_view_BuyerNotesV3_Statewise",         name: "RunLists_Ext.view_BuyerNotesV3_Statewise",             color: "lightcyan" },
+        { key: "v_view_BuyerNotesV3_Statewise_Adesa",   name: "RunLists_Ext.view_BuyerNotesV3_Statewise_Adesa",       color: "lightcyan" },
         { key: "v_View_Parse_Series",                   name: "RunLists_Ext.View_Parse_Series",                       color: "lightcyan" },
         { key: "v_corelive",                            name: "vauto_web_extension.corelive",                         color: "lightcyan" },
         { key: "v_qlik_location_dealer_mapping",        name: "vauto_web_extension.qlik_location_dealer_mapping",     color: "lightcyan" },
@@ -278,6 +292,7 @@ function loadGlobalModel() {
         { key: "v_sales_last90_totals",                 name: "vauto_web_extension.sales_last90_totals",              color: "lightcyan" },
         
         // Scheduled Queries
+        { key: "s_Adesa_DNB_Search_String",             name: "Adesa_DNB_Search_String [11:15PM]",                              color: "lightyellow" },
         { key: "s_Adesa_Listings_Followup_1",           name: "Adesa_Listings_Followup_1 [3PM]",                              color: "lightyellow" },
         { key: "s_Adesa_Listings_Followup_2",           name: "Adesa_Listings_Followup_2 [7:10AM]",                           color: "lightyellow" },
         { key: "s_Adesa_Listings_Followup_3",           name: "Adesa_Listings_Followup_3 [10:10PM]",                          color: "lightyellow" },
@@ -294,12 +309,17 @@ function loadGlobalModel() {
         { key: "s_Proc_Insert_DNB_VAT_lowgrade",        name: "Proc_Insert_DNB_VAT_lowgrade [7:05AM]",                        color: "lightyellow" },
         { key: "s_Proc_ReconTest",                      name: "Proc_ReconTest [1 hour]",                                      color: "lightyellow" },
         { key: "s_Proc_SUV_Model_Inventory",            name: "Proc_SUV_Model_Inventory [3PM]",                               color: "lightyellow" },
+      	{ key: "s_Proc_view_DNB_Adesa_S1",              name: "Proc_view_DNB_Adesa_S1 [7:10AM]",                              color: "lightyellow" },
       	{ key: "s_Proc_View_DNB_Archives_tbl",          name: "Proc_View_DNB_Archives_tbl [3 hours]",                         color: "lightyellow" },
         { key: "s_Refresh_Core_Table",                  name: "Refresh Core Table [6 hours]",                                 color: "lightyellow" },
         { key: "s_Refresh_Sales_Last90_Summary_Cache",  name: "Refresh Sales Last90 Summary Cache [6 hours]",                 color: "lightyellow" },
+        { key: "s_UpdateBuyerNotesAdesaV3",             name: "UpdateBuyerNotesAdesaV3 [7:15AM]",                             color: "lightyellow" },
+        { key: "s_UpdateBuyerNotesEdge",                name: "UpdateBuyerNotesEdge [7:15AM]",                                color: "lightyellow" },
+        { key: "s_UpdateBuyerNotesManheimCSS",          name: "Update BuyerNotes_Manheim_CSS [7:30AM]",                       color: "lightyellow" },
         { key: "s_UpdateBuyerNotesV3",                  name: "UpdateBuyerNotesV3 [7:15AM]",                                  color: "lightyellow" },
         
         // Procedures
+        { key: "p_Adesa_DNB_Search_String",             name: "Adesa_DNB_Search_String",                                  color: "lightpink" },
         { key: "p_BuyersLogs_US_Int_Main",              name: "BuyersLogs_US_Int_Main_Current_Linked_to_Permanent",       color: "lightpink" },
         { key: "p_loadCrListingsArchive_v2",            name: "loadCrListingsArchive_v2 [5:30+45AM, 8+30AM, 9:15+40PM]",  color: "lightpink" },
         { key: "p_Mapping_Adesa_To_Manheim",            name: "Mapping_Adesa_To_Manheim",                                 color: "lightpink" },
@@ -313,7 +333,11 @@ function loadGlobalModel() {
         { key: "p_Proc_Get_Recon_Test",                 name: "Proc_Get_Recon_Test",                                      color: "lightpink" },
         { key: "p_proc_loadVhr",                        name: "proc_loadVhr [6:30AM, 9:15PM]",                            color: "lightpink" },
         { key: "p_Proc_SUV_Model_Inventory",            name: "Proc_SUV_Model_Inventory",                                 color: "lightpink" },
+        { key: "p_proc_UpdateBuyerNotesAdesaV3",        name: "proc_UpdateBuyerNotesAdesaV3",                             color: "lightpink" },
+        { key: "p_proc_UpdateBuyerNotesEdge",           name: "proc_UpdateBuyerNotesEdge",                                color: "lightpink" },
+        { key: "p_proc_UpdateBuyerNotesManheimCSS",     name: "proc_UpdateBuyerNotesManheimCSS",                          color: "lightpink" },
         { key: "p_proc_UpdateBuyerNotesV3",             name: "proc_UpdateBuyerNotesV3",                                  color: "lightpink" },
+      	{ key: "p_Proc_view_DNB_Adesa_S1",              name: "Proc_view_DNB_Adesa_S1",                                   color: "lightpink" },
       	{ key: "p_Proc_View_DNB_Archives_tbl",          name: "Proc_View_DNB_Archives_tbl",                               color: "lightpink" },
         { key: "p_procLoadListingArchives",             name: "procLoadListingArchives [5AM, 8:45PM]",                    color: "lightpink" },
         { key: "p_Refresh_Core_Table",                  name: "Refresh Core Table",                                       color: "lightpink" },
@@ -330,6 +354,9 @@ function loadGlobalModel() {
         { key: "g_Mechanical_Cost",                     name: "Mechanical_Cost",                                      color: "lightgreen" },
         { key: "g_VAT_Final",                           name: "VAT-Final",                                            color: "lightgreen" },
         { key: "g_WindshieldReplacement",               name: "WindshieldReplacement",                                color: "lightgreen" },
+
+        // Functions
+      	{ key: "f_func_AdesaAuctions",                  name: "Adesa_Ext.func_AdesaAuctions",                         color: "plum" },
         
       ], [
         
@@ -617,6 +644,94 @@ function loadGlobalModel() {
           // BuyerNotesV3
           { from: "v_view_BuyerNotesV3", to: "s_UpdateBuyerNotesV3" },
           { from: "s_UpdateBuyerNotesV3", to: "p_proc_UpdateBuyerNotesV3" },
-          { from: "p_proc_UpdateBuyerNotesV3", to: "t_BuyerNotesV3" }
+          { from: "p_proc_UpdateBuyerNotesV3", to: "t_BuyerNotesV3" },
+          { from: "t_BuyerNotesV3", to: "s_UpdateBuyerNotesManheimCSS" },
+          { from: "s_UpdateBuyerNotesManheimCSS", to: "p_proc_UpdateBuyerNotesManheimCSS" },
+          { from: "p_proc_UpdateBuyerNotesManheimCSS", to: "t_BuyerNotes_Manheim_CSS" },
+
+          // Adesa_DNB_Archive
+          { from: "t_AdesaEventsCA", to: "s_Adesa_DNB_Search_String" },
+          { from: "t_AdesaEventsUS", to: "s_Adesa_DNB_Search_String" },
+          { from: "s_Adesa_DNB_Search_String", to: "p_Adesa_DNB_Search_String" },
+          { from: "p_Adesa_DNB_Search_String", to: "t_Adesa_DNB_Archive" },
+
+          // view_DNB_Adesa_S1
+          { from: "t_Car_Arbitration_All", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_preview", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_CR_Keywords_Table", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_banned_sellers", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_AuctionDetail", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_vhr", to: "v_view_DNB_Adesa_S1" },
+          { from: "v_view_AdesaAuction", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_Adesa_DNB_Archive", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_DNB_VAT_lowgrade", to: "v_view_DNB_Adesa_S1" },
+          { from: "t_Adesa_CR_Listing", to: "v_view_DNB_Adesa_S1" },
+
+          // view_DNB_Adesa_S1_tbl
+          { from: "v_view_DNB_Adesa_S1", to: "s_Proc_view_DNB_Adesa_S1" },
+          { from: "s_Proc_view_DNB_Adesa_S1", to: "p_Proc_view_DNB_Adesa_S1" },
+          { from: "p_Proc_view_DNB_Adesa_S1", to: "t_view_DNB_Adesa_S1_tbl" },
+
+          // func_AdesaAuctions
+          { from: "t_AdesaEventsCA", to: "f_func_AdesaAuctions" },
+          { from: "t_AdesaEventsUS", to: "f_func_AdesaAuctions" },
+
+          // view_BuyerNotesV3_DealerWise_Adesa
+          { from: "f_func_AdesaAuctions", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "t_manheim_auction", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "t_Recon_Cost", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "t_AuctionDetail", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "t_dealerops_dealer_mapping", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "t_InventoryData", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "t_sales_last90_summary_cache", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+          { from: "v_View_Parse_Series", to: "v_view_BuyerNotesV3_DealerWise_Adesa" },
+
+          // view_BuyerNotesV3_Statewise_Adesa
+          { from: "f_func_AdesaAuctions", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "t_manheim_auction", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "t_Recon_Cost", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "t_AuctionDetail", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "t_dealerops_dealer_mapping", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "t_InventoryData", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "t_sales_last90_summary_cache", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "v_view_DNB_Adesa_S1", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+          { from: "v_View_Parse_Series", to: "v_view_BuyerNotesV3_Statewise_Adesa" },
+        
+          // BuyerNotesAdesaV3
+          { from: "t_view_DNB_Adesa_S1_tbl", to: "v_view_BuyerNotesV3_Adesa" },
+          { from: "t_CR_machine_learning_rank", to: "v_view_BuyerNotesV3_Adesa" },
+          { from: "f_func_AdesaAuctions", to: "v_view_BuyerNotesV3_Adesa" },
+          { from: "t_Adesa_CR_Listing", to: "v_view_BuyerNotesV3_Adesa" },
+          { from: "v_view_BuyerNotesV3_DealerWise_Adesa", to: "v_view_BuyerNotesV3_Adesa" },
+          { from: "v_view_BuyerNotesV3_Statewise_Adesa", to: "v_view_BuyerNotesV3_Adesa" },
+          { from: "v_view_BuyerNotesV3_Adesa", to: "s_UpdateBuyerNotesAdesaV3" },
+          { from: "s_UpdateBuyerNotesAdesaV3", to: "p_proc_UpdateBuyerNotesAdesaV3" },
+          { from: "p_proc_UpdateBuyerNotesAdesaV3", to: "t_BuyerNotesAdesaV3" },
+
+          // view_BuyerNotesEdge_Dealerwise
+          { from: "t_AuctionDetail", to: "v_view_BuyerNotesEdge_Dealerwise" },
+          { from: "t_manheim_auction", to: "v_view_BuyerNotesEdge_Dealerwise" },
+          { from: "t_Recon_Cost", to: "v_view_BuyerNotesEdge_Dealerwise" },
+          { from: "t_dealerops_dealer_mapping", to: "v_view_BuyerNotesEdge_Dealerwise" },
+          { from: "t_InventoryData", to: "v_view_BuyerNotesEdge_Dealerwise" },
+          { from: "t_sales_last90_summary_cache", to: "v_view_BuyerNotesEdge_Dealerwise" },
+          { from: "v_View_Parse_Series", to: "v_view_BuyerNotesEdge_Dealerwise" },
+
+          // view_BuyerNotesEdge_Statewise
+          { from: "t_AuctionDetail", to: "v_view_BuyerNotesEdge_Statewise" },
+          { from: "t_manheim_auction", to: "v_view_BuyerNotesEdge_Statewise" },
+          { from: "t_Recon_Cost", to: "v_view_BuyerNotesEdge_Statewise" },
+          { from: "t_dealerops_dealer_mapping", to: "v_view_BuyerNotesEdge_Statewise" },
+          { from: "t_InventoryData", to: "v_view_BuyerNotesEdge_Statewise" },
+          { from: "t_sales_last90_summary_cache", to: "v_view_BuyerNotesEdge_Statewise" },
+          { from: "v_View_Parse_Series", to: "v_view_BuyerNotesEdge_Statewise" },
+
+          // BuyerNotesEdge
+          { from: "v_view_BuyerNotesEdge_Dealerwise", to: "v_view_BuyerNotesEdge" },
+          { from: "v_view_BuyerNotesEdge_Statewise", to: "v_view_BuyerNotesEdge" },
+          { from: "v_view_BuyerNotesEdge", to: "s_UpdateBuyerNotesEdge" },
+          { from: "s_UpdateBuyerNotesEdge", to: "p_proc_UpdateBuyerNotesEdge" },
+          { from: "p_proc_UpdateBuyerNotesEdge", to: "t_BuyerNotesEdge" },
+
         ]);
     }
